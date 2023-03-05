@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -14,7 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MScanner.Helpers\MScanner.Helpers.csproj" />
     <ProjectReference Include="..\MScanner.Models\MScanner.Models.csproj" />
+    <ProjectReference Include="..\MScanner.Services\MScanner.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

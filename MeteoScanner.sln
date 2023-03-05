@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.Services", "MScann
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.WebUI", "MScanner.WebUI\MScanner.WebUI.csproj", "{DA79153C-792F-419F-A4B2-FAA924383062}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.Helpers", "MScanner.Helpers\MScanner.Helpers.csproj", "{F83465E0-A701-49D4-92F1-96620DB1A060}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MScanner.Storage", "MScanner.Infra\MScanner.Storage.csproj", "{AFFAD236-E811-4247-A349-404485526784}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{DA79153C-792F-419F-A4B2-FAA924383062}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA79153C-792F-419F-A4B2-FAA924383062}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA79153C-792F-419F-A4B2-FAA924383062}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83465E0-A701-49D4-92F1-96620DB1A060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83465E0-A701-49D4-92F1-96620DB1A060}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83465E0-A701-49D4-92F1-96620DB1A060}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83465E0-A701-49D4-92F1-96620DB1A060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFFAD236-E811-4247-A349-404485526784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFFAD236-E811-4247-A349-404485526784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFFAD236-E811-4247-A349-404485526784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFFAD236-E811-4247-A349-404485526784}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

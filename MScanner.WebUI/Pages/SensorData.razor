@@ -1,9 +1,14 @@
 ﻿@page "/SensorData"
 @using Microsoft.AspNetCore.SignalR.Client
+@using MScanner.Helpers
 @using MScanner.Models.Models
+@using MScanner.Services.Api
 @using MScanner.WebUI.Hubs
 @using MScanner.WebUI.Hubs.MScanner.WebUI.Hubs
+@using System.Timers
+@using Timer = System.Threading.Timer
 @inject HubConnection HubConnection
+@inject ISensorDataFilteringService SensorDataFilteringService
 
 <h1>Sensor Data</h1>
 
@@ -32,12 +37,12 @@
     }
     </tbody>
 </table>
-
+<button @onclick="StartTimer">Start Timer</button>
 @code {
     private readonly List<SensorDataModel> _sensorDataList = new();
     private SensorDataHubProxy? _sensorDataHubProxy;
     private HubConnection _hubConnection;
-
+    public Timer Timer { get; set; }
     protected override async Task OnInitializedAsync()
     {
         _hubConnection = new HubConnectionBuilder()
@@ -51,14 +56,31 @@
         _sensorDataHubProxy.RegisterHandlers("ReceiveSensorData", OnReceiveSensorData);
     }
 
+    private void StartTimer()
+    {
+        Timer = new Timer(state => {
+                                       var sensorData = SensorTestSampleDataHelper.GetTestSensorData();
+                                       _sensorDataList.Add(sensorData);
+                                       StateHasChanged();
+        }, null, TimeSpan.Zero, TimeSpan.FromSeconds(20));
+    }
+
+    private void StopTimer()
+    {
+        Timer?.Dispose();
+    }
+
     public async ValueTask DisposeAsync()
     {
+        StopTimer();
         if (_sensorDataHubProxy != null) await _sensorDataHubProxy.DisconnectAsync();
     }
 
     private void OnReceiveSensorData(SensorDataModel sensorData)
     {
         _sensorDataList.Add(sensorData);
+        SensorDataFilteringService.AddSensorData(sensorData);
+        var res = SensorDataFilteringService.FilterSensorDataStream(FilterDefinitionsHelper.TemperatureFilter(0,5));
         StateHasChanged();
     }
 }
