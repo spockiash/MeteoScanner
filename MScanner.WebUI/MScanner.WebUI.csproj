@@ -17,4 +17,10 @@
     <ProjectReference Include="..\MScanner.Models\MScanner.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -26,14 +26,11 @@ namespace MScanner.WebUI.Hubs
                 await _hubConnection.StopAsync();
             }
 
-            public event Action<SensorDataModel> SensorDataReceived;
+            public event Action<SensorDataModel>? SensorDataReceived;
 
-            public void RegisterHandlers()
+            public void RegisterHandlers(string method, Action<SensorDataModel> handler)
             {
-                _hubConnection.On<SensorDataModel>("ReceiveSensorData", (sensorData) =>
-                {
-                    SensorDataReceived?.Invoke(sensorData);
-                });
+                _hubConnection.On(method, handler);
             }
         }
     }

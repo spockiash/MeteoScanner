@@ -2,7 +2,8 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @using MScanner.Models.Models
 @using MScanner.WebUI.Hubs
-@inject HubConnection SensorDataHubProxy
+@using MScanner.WebUI.Hubs.MScanner.WebUI.Hubs
+@inject HubConnection HubConnection
 
 <h1>Sensor Data</h1>
 
@@ -18,7 +19,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var sensorData in sensorDataList)
+    @foreach (var sensorData in _sensorDataList)
     {
         <tr>
             <td>@sensorData.Id</td>
@@ -33,22 +34,31 @@
 </table>
 
 @code {
-    private List<SensorDataModel> sensorDataList = new List<SensorDataModel>();
+    private readonly List<SensorDataModel> _sensorDataList = new();
+    private SensorDataHubProxy? _sensorDataHubProxy;
+    private HubConnection _hubConnection;
 
     protected override async Task OnInitializedAsync()
     {
+        _hubConnection = new HubConnectionBuilder()
+            .WithUrl("https://localhost:7080/sensorDataHub")
+            .WithAutomaticReconnect()
+            .Build();
+
+        _sensorDataHubProxy = new SensorDataHubProxy(_hubConnection);
+
         await _sensorDataHubProxy.ConnectAsync();
-        _sensorDataHubProxy.RegisterHandlers();
+        _sensorDataHubProxy.RegisterHandlers("ReceiveSensorData", OnReceiveSensorData);
     }
 
     public async ValueTask DisposeAsync()
     {
-        await _sensorDataHubProxy.DisconnectAsync();
+        if (_sensorDataHubProxy != null) await _sensorDataHubProxy.DisconnectAsync();
     }
 
     private void OnReceiveSensorData(SensorDataModel sensorData)
     {
-        sensorDataList.Add(sensorData);
+        _sensorDataList.Add(sensorData);
         StateHasChanged();
     }
 }
