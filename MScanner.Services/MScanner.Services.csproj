@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MScanner.Infra\MScanner.Storage.csproj" />
     <ProjectReference Include="..\MScanner.Models\MScanner.Models.csproj" />
   </ItemGroup>
 

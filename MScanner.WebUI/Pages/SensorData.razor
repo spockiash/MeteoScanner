@@ -3,42 +3,17 @@
 @using MScanner.Helpers
 @using MScanner.Models.Models
 @using MScanner.Services.Api
-@using MScanner.WebUI.Hubs
 @using MScanner.WebUI.Hubs.MScanner.WebUI.Hubs
-@using System.Timers
 @using Timer = System.Threading.Timer
 @inject HubConnection HubConnection
 @inject ISensorDataFilteringService SensorDataFilteringService
 
 <h1>Sensor Data</h1>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Temperature</th>
-        <th>Humidity</th>
-        <th>UV Intensity</th>
-        <th>Air Quality</th>
-        <th>Timestamp</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var sensorData in _sensorDataList)
-    {
-        <tr>
-            <td>@sensorData.Id</td>
-            <td>@sensorData.Temperature</td>
-            <td>@sensorData.Humidity</td>
-            <td>@sensorData.UVIntensity</td>
-            <td>@sensorData.AirQuality</td>
-            <td>@sensorData.Timestamp</td>
-        </tr>
-    }
-    </tbody>
-</table>
-<button @onclick="StartTimer">Start Timer</button>
+<SensorStreamGrid @ref="_grid"></SensorStreamGrid>
+
 @code {
+    private SensorStreamGrid? _grid;
     private readonly List<SensorDataModel> _sensorDataList = new();
     private SensorDataHubProxy? _sensorDataHubProxy;
     private HubConnection _hubConnection;
@@ -56,23 +31,8 @@
         _sensorDataHubProxy.RegisterHandlers("ReceiveSensorData", OnReceiveSensorData);
     }
 
-    private void StartTimer()
-    {
-        Timer = new Timer(state => {
-                                       var sensorData = SensorTestSampleDataHelper.GetTestSensorData();
-                                       _sensorDataList.Add(sensorData);
-                                       StateHasChanged();
-        }, null, TimeSpan.Zero, TimeSpan.FromSeconds(20));
-    }
-
-    private void StopTimer()
-    {
-        Timer?.Dispose();
-    }
-
     public async ValueTask DisposeAsync()
     {
-        StopTimer();
         if (_sensorDataHubProxy != null) await _sensorDataHubProxy.DisconnectAsync();
     }
 
@@ -80,6 +40,7 @@
     {
         _sensorDataList.Add(sensorData);
         SensorDataFilteringService.AddSensorData(sensorData);
+        _grid?.AddSensorData(sensorData);
         var res = SensorDataFilteringService.FilterSensorDataStream(FilterDefinitionsHelper.TemperatureFilter(0,5));
         StateHasChanged();
     }
