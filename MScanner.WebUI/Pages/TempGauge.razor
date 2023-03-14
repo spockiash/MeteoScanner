@@ -1,0 +1,30 @@
+﻿@using MScanner.Models.Models
+@using Radzen.Blazor
+
+@if (SensorData != null)
+{
+    <RadzenRadialGauge Style="width: 200px; height: 200px;"
+                       Min="-50" Max="50"
+                       RangeColor0="Black" RangeMin0="-50" RangeMax0="-15"
+                       RangeColor1="Blue" RangeMin1="-15" RangeMax1="0"
+                       RangeColor2="LightGreen" RangeMin2="0" RangeMax2="10"
+                       RangeColor3="Green" RangeMin3="10" RangeMax3="20"
+                       RangeColor4="Yellow" RangeMin4="20" RangeMax4="30"
+                       RangeColor5="Red" RangeMin5="30" RangeMax5="50"
+                       Value="@SensorData.Temperature">
+    </RadzenRadialGauge>
+}
+else
+{
+    <p>No data available.</p>
+}
+
+@code {
+    [Parameter] public SensorDataModel? SensorData { get; set; }
+
+    public void Update(SensorDataModel newMeasurement)
+    {
+        SensorData = newMeasurement;
+        StateHasChanged();
+    }
+}

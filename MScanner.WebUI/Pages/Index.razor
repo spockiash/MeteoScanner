@@ -6,7 +6,7 @@
 
 Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@*<SurveyPrompt Title="How is Blazor working for you?" />
 <RadzenRadialGauge>
     <RadzenRadialGaugeScale Min="0" Max="260">
         <RadzenRadialGaugeScalePointer Value="50" />
@@ -15,3 +15,87 @@ Welcome to your new app.
         <RadzenRadialGaugeScaleRange From="140" To="260" Fill="red" />
     </RadzenRadialGaugeScale>
 </RadzenRadialGauge>
+
+
+<div class="container" style="display: flex; flex-direction: column;
+                              flex-wrap: nowrap;
+                              justify-content: flex-start;
+                              align-items: stretch;
+                              align-content: stretch; max-width: 360px; padding: 100px;">
+    <RadzenBadge Text="Temperature [°C]" Color="secondary" />
+
+    <RadzenRadialGauge Style="width: 360px; height: 360px;">
+        <RadzenRadialGaugeScale Min="-50" Max="50">
+            <RadzenRadialGaugeScalePointer Value="-40" />
+            <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
+            <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
+            <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
+            <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
+            <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
+            <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red" />
+        </RadzenRadialGaugeScale>
+    </RadzenRadialGauge>
+</div>*@
+
+<div class = "gauge-container">
+    <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
+        <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
+        <RadzenRadialGauge >
+            <RadzenRadialGaugeScale Min="-50" Max="50">
+                <RadzenRadialGaugeScalePointer Value="-40" />
+                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
+                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
+                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
+                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
+                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
+                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red" />
+            </RadzenRadialGaugeScale>
+        </RadzenRadialGauge>
+    </RadzenCard>
+    <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
+        <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
+        <RadzenRadialGauge >
+            <RadzenRadialGaugeScale Min="-50" Max="50">
+                <RadzenRadialGaugeScalePointer Value="-40" />
+                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
+                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
+                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
+                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
+                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
+                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red" />
+            </RadzenRadialGaugeScale>
+        </RadzenRadialGauge>
+    </RadzenCard>
+    <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
+        <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
+        <RadzenRadialGauge >
+            <RadzenRadialGaugeScale Min="-50" Max="50">
+                <RadzenRadialGaugeScalePointer Value="-40" />
+                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
+                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
+                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
+                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
+                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
+                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red" />
+            </RadzenRadialGaugeScale>
+        </RadzenRadialGauge>
+    </RadzenCard>
+    <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
+        <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
+        <RadzenRadialGauge >
+            <RadzenRadialGaugeScale Min="-50" Max="50">
+                <RadzenRadialGaugeScalePointer Value="-40" />
+                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
+                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
+                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
+                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
+                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
+                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red" />
+            </RadzenRadialGaugeScale>
+        </RadzenRadialGauge>
+    </RadzenCard>
+</div>
+
+
+
+

@@ -11,13 +11,15 @@
 <h1>Sensor Data</h1>
 
 <SensorStreamGrid @ref="_grid"></SensorStreamGrid>
-
+<TempGauge @ref="_tempGauge" SensorData="@_latestSensorData"></TempGauge>
 @code {
     private SensorStreamGrid? _grid;
     private readonly List<SensorDataModel> _sensorDataList = new();
     private SensorDataHubProxy? _sensorDataHubProxy;
     private HubConnection _hubConnection;
     public Timer Timer { get; set; }
+    private SensorDataModel _latestSensorData = new SensorDataModel();
+    private TempGauge? _tempGauge;
     protected override async Task OnInitializedAsync()
     {
         _hubConnection = new HubConnectionBuilder()
@@ -41,6 +43,8 @@
         _sensorDataList.Add(sensorData);
         SensorDataFilteringService.AddSensorData(sensorData);
         _grid?.AddSensorData(sensorData);
+        _latestSensorData = sensorData; // update latest sensor data
+        _tempGauge?.Update(sensorData); // update temperature gauge
         var res = SensorDataFilteringService.FilterSensorDataStream(FilterDefinitionsHelper.TemperatureFilter(0,5));
         StateHasChanged();
     }
