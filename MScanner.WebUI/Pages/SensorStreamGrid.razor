@@ -2,25 +2,51 @@
 @using MScanner.Models.Models
 @using Radzen.Blazor
 
-<div>
-    <RadzenGrid TItem="SensorDataModel" Data="@_sensorDataList" Height="600px" PageSize="50" Virtualize="true">
+@*<div>
+    <RadzenGrid TItem="SensorDataModel" Data="@_sensorDataList" Height="600px" PageSize="50" Virtualize="false">
         <Columns>
             <RadzenGridColumn TItem="SensorDataModel" Property="Id" Title="Id" Width="50px" />
             <RadzenGridColumn TItem="SensorDataModel" Property="Temperature" Title="Temperature" />
             <RadzenGridColumn TItem="SensorDataModel" Property="Humidity" Title="Humidity" />
-            <RadzenGridColumn TItem="SensorDataModel" Property="UVIntensity" Title="UV Intensity" />
-            <RadzenGridColumn TItem="SensorDataModel" Property="AirQuality" Title="Air Quality" />
+            <RadzenGridColumn TItem="SensorDataModel" Property="WindSpeed" Title="Wind speed" />
+            <RadzenGridColumn TItem="SensorDataModel" Property="WindDirection" Title="Wind direction" />
             <RadzenGridColumn TItem="SensorDataModel" Property="Timestamp" Title="Timestamp" Width="200px" />
         </Columns>
     </RadzenGrid>
-</div>
+</div>*@
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Temperature</th>
+        <th>Humidity</th>
+        <th>Wind speed</th>
+        <th>Wind direction</th>
+        <th>Timestamp</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var sensorData in _sensorDataList)
+    {
+        <tr>
+            <td>@sensorData.Id</td>
+            <td>@sensorData.Temperature.ToString("F2")</td>
+            <td>@sensorData.Humidity.ToString("F2")</td>
+            <td>@sensorData.WindSpeed.ToString("F2")</td>
+            <td>@sensorData.WindDirection.ToString("F2")</td>
+            <td>@sensorData.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
+        </tr>
+    }
+    </tbody>
+</table>
 
 @code {
     private readonly List<SensorDataModel> _sensorDataList = new List<SensorDataModel>();
 
-    public void AddSensorData(SensorDataModel data)
+    public async Task AddSensorData(SensorDataModel data)
     {
         _sensorDataList.Add(data);
-        StateHasChanged();
+        await InvokeAsync(StateHasChanged);
     }
 }

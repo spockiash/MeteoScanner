@@ -1,37 +1,55 @@
 ﻿@page "/SensorData"
 @using Microsoft.AspNetCore.SignalR.Client
+@using MScanner.Factories
 @using MScanner.Helpers
 @using MScanner.Models.Models
-@using MScanner.Services.Api
+
+@using MScanner.WebUI.Constants
 @using MScanner.WebUI.Hubs.MScanner.WebUI.Hubs
 @using Timer = System.Threading.Timer
 @inject HubConnection HubConnection
-@inject ISensorDataFilteringService SensorDataFilteringService
+
+@inject IUrlFactory UrlFactory
+@inject IHubConnectionFactory HubConnectionFactory
 
 <h1>Sensor Data</h1>
-
+<ApiTester></ApiTester>
 <SensorStreamGrid @ref="_grid"></SensorStreamGrid>
-<TempGauge @ref="_tempGauge" SensorData="@_latestSensorData"></TempGauge>
+
 @code {
     private SensorStreamGrid? _grid;
     private readonly List<SensorDataModel> _sensorDataList = new();
+
     private SensorDataHubProxy? _sensorDataHubProxy;
-    private HubConnection _hubConnection;
-    public Timer Timer { get; set; }
-    private SensorDataModel _latestSensorData = new SensorDataModel();
-    private TempGauge? _tempGauge;
+
+
+
+    private HubConnection? _hubConnection;
+
+
     protected override async Task OnInitializedAsync()
     {
-        _hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://localhost:7080/sensorDataHub")
-            .WithAutomaticReconnect()
-            .Build();
+        //set url factory
+        UrlFactory.Initialize(ProjectConstants.ApiUrl);
 
-        _sensorDataHubProxy = new SensorDataHubProxy(_hubConnection);
-
-        await _sensorDataHubProxy.ConnectAsync();
-        _sensorDataHubProxy.RegisterHandlers("ReceiveSensorData", OnReceiveSensorData);
+        //setup hub proxy connection
+        if (await NetworkHelper.IsApiOnline(UrlFactory.CreateUrl(EndPoints.Ping)))
+        {
+            await EstablishConnection();
+        }
     }
+
+    private async Task EstablishConnection()
+    {
+        _hubConnection = HubConnectionFactory.GetConnectionBuilder(UrlFactory.CreateUrl(EndPoints.SensorDataHub));
+        _sensorDataHubProxy = new SensorDataHubProxy(_hubConnection);
+        if (_sensorDataHubProxy != null)
+        {
+            await _sensorDataHubProxy.ConnectAsync();
+            _sensorDataHubProxy.RegisterHandlers("ReceiveSensorData", OnReceiveSensorData);
+        }
+    }
+
 
     public async ValueTask DisposeAsync()
     {
@@ -41,11 +59,7 @@
     private void OnReceiveSensorData(SensorDataModel sensorData)
     {
         _sensorDataList.Add(sensorData);
-        SensorDataFilteringService.AddSensorData(sensorData);
         _grid?.AddSensorData(sensorData);
-        _latestSensorData = sensorData; // update latest sensor data
-        _tempGauge?.Update(sensorData); // update temperature gauge
-        var res = SensorDataFilteringService.FilterSensorDataStream(FilterDefinitionsHelper.TemperatureFilter(0,5));
         StateHasChanged();
     }
 }

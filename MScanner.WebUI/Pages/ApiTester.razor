@@ -1,0 +1,44 @@
+﻿@using MScanner.Factories
+@using MScanner.Helpers
+@using MScanner.Models.Models
+@using MScanner.WebUI.Constants
+@inject HttpClient Http;
+@inject IUrlFactory UrlFactory
+
+<button @onclick="SetTimer">StartTest</button>
+
+@code {
+    private Timer? _timer;
+    private SensorDataModel? _currentData;
+
+    protected override async Task OnInitializedAsync()
+    {
+        UrlFactory.Initialize(ProjectConstants.ApiUrl);
+        InitModel();
+        //await base.OnInitializedAsync();
+        //_currentData = MockupDataHelper.GetMockupInitData();
+    }
+
+    private void InitModel()
+    {
+        _currentData = MockupDataHelper.GetMockupInitData();
+    }
+
+    private void SetNext()
+    {
+        if (_currentData != null) _currentData = MockupDataHelper.GetNextMockup(_currentData);
+    }
+
+    private async Task SetTimer()
+    {
+        _timer = new Timer(async (object? stateInfo) => { await TriggerTest(stateInfo);}, new System.Threading.AutoResetEvent(false), 20000, 20000);
+    }
+
+    private async Task TriggerTest(object? stateInfo)
+    {
+        SetNext();
+        var url = UrlFactory.CreateUrl(EndPoints.SensorData);
+        await Http.PostAsJsonAsync(url, _currentData);
+        StateHasChanged();
+    }
+}

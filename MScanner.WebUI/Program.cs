@@ -4,8 +4,8 @@ using MScanner.WebUI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.AspNetCore.Components;
-using MScanner.Services;
-using MScanner.Services.Api;
+
+using MScanner.Factories;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -14,7 +14,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-builder.Services.AddScoped<ISensorDataFilteringService, SensorDataFilteringService>();
+builder.Services.AddScoped<IUrlFactory, UrlFactory>();
+builder.Services.AddScoped<IHubConnectionFactory, HubConnectionFactory>();
 builder.Services.AddSingleton(sp =>
 {
     var configuration = new ConfigurationBuilder()
