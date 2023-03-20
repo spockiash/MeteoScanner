@@ -4,24 +4,21 @@
 @if (SensorData != null)
 {
     <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
-        <RadzenText TextStyle="TextStyle.DisplayH4">Temperature</RadzenText>
+
+        <RadzenText TextStyle="TextStyle.DisplayH4">Wind speed</RadzenText>
         <RadzenRadialGauge Style="width: 100%; height: 250px;">
-            <RadzenRadialGaugeScale Min="-50" Max="60">
-                <RadzenRadialGaugeScalePointer Value=@SensorData.Temperature Length="0.6">
+            <RadzenRadialGaugeScale StartAngle="0" EndAngle="300" Step="20" Min="0" Max="300" TickPosition=GaugeTickPosition.Outside>
+                <RadzenRadialGaugeScalePointer Value=@SensorData.WindSpeed Length="0.6">
                     <Template Context="pointer">
                         <h4>
-                            @pointer.Value <sup>°C</sup>
+                            @pointer.Value <sup>km/h</sup>
                         </h4>
                     </Template>
                 </RadzenRadialGaugeScalePointer>
-                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
-                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
-                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
-                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
-                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
-                <RadzenRadialGaugeScaleRange From="30" To="60" Fill="Red" />
+                <RadzenRadialGaugeScaleRange From="0" To="300" Fill="red" />
             </RadzenRadialGaugeScale>
         </RadzenRadialGauge>
+
     </RadzenCard>
 }
 else

@@ -14,13 +14,40 @@
 
 <h1>Sensor Data</h1>
 <ApiTester></ApiTester>
+
+<div class="instruments-container">
+    
+    <TempGauge @ref="_tempGauge" SensorData="@_latestData"></TempGauge>
+    <CompassGauge @ref="_compassGauge" SensorData="@_latestData"></CompassGauge>
+    <HumidityGauge @ref="_humidityGauge" SensorData="@_latestData"></HumidityGauge>
+    <WindSpeedGauge @ref="_windSpeedGauge" SensorData="@_latestData"></WindSpeedGauge>
+
+</div>
+
 <SensorStreamGrid @ref="_grid"></SensorStreamGrid>
+
+<style>
+    .instruments-container {
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+</style>
 
 @code {
     private SensorStreamGrid? _grid;
     private readonly List<SensorDataModel> _sensorDataList = new();
+    private SensorDataModel? _latestData;
 
     private SensorDataHubProxy? _sensorDataHubProxy;
+
+    private TempGauge? _tempGauge;
+    private CompassGauge? _compassGauge;
+    private HumidityGauge? _humidityGauge;
+    private WindSpeedGauge? _windSpeedGauge;
 
 
 
@@ -60,6 +87,17 @@
     {
         _sensorDataList.Add(sensorData);
         _grid?.AddSensorData(sensorData);
+        _latestData = sensorData;
+        UpdateInstruments();
         StateHasChanged();
+    }
+
+    private void UpdateInstruments()
+    {
+        if (_latestData == null) return;
+        _tempGauge?.Update(_latestData);
+        _compassGauge?.Update(_latestData);
+        _humidityGauge?.Update(_latestData);
+        _windSpeedGauge?.Update(_latestData);
     }
 }

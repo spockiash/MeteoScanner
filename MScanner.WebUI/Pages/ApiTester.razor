@@ -5,11 +5,24 @@
 @inject HttpClient Http;
 @inject IUrlFactory UrlFactory
 
-<button @onclick="SetTimer">StartTest</button>
+<div class="api-test-panel">
+    <RadzenText TextStyle="TextStyle.H6">@_messageText</RadzenText>
+    @if (!_isTestRunning)
+    {
+        <button @onclick="SetTimer">Start Test</button>
+    }
+    else
+    {
+        <button @onclick="StopTimer">Stop Test</button>
+    }
+</div>
+
 
 @code {
     private Timer? _timer;
     private SensorDataModel? _currentData;
+    private bool _isTestRunning = false;
+    private string _messageText = String.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -22,6 +35,8 @@
     private void InitModel()
     {
         _currentData = MockupDataHelper.GetMockupInitData();
+        _messageText = "Mockup initialized";
+        StateHasChanged();
     }
 
     private void SetNext()
@@ -31,7 +46,18 @@
 
     private async Task SetTimer()
     {
-        _timer = new Timer(async (object? stateInfo) => { await TriggerTest(stateInfo);}, new System.Threading.AutoResetEvent(false), 20000, 20000);
+        _isTestRunning = true;
+        _messageText = "Test started";
+        _timer = new Timer(async (object? stateInfo) => { await TriggerTest(stateInfo);}, new System.Threading.AutoResetEvent(false), 5000, 5000);
+        StateHasChanged();
+    }
+
+    private async Task StopTimer()
+    {
+        if (_timer != null) await _timer.DisposeAsync();
+        _messageText = "Test stopped";
+        _isTestRunning = false;
+        StateHasChanged();
     }
 
     private async Task TriggerTest(object? stateInfo)
@@ -39,6 +65,7 @@
         SetNext();
         var url = UrlFactory.CreateUrl(EndPoints.SensorData);
         await Http.PostAsJsonAsync(url, _currentData);
+        _messageText = "POST call to API";
         StateHasChanged();
     }
 }

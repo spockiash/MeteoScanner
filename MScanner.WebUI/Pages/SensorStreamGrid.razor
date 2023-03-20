@@ -15,31 +15,59 @@
     </RadzenGrid>
 </div>*@
 
-<table>
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Temperature</th>
-        <th>Humidity</th>
-        <th>Wind speed</th>
-        <th>Wind direction</th>
-        <th>Timestamp</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var sensorData in _sensorDataList)
-    {
-        <tr>
-            <td>@sensorData.Id</td>
-            <td>@sensorData.Temperature.ToString("F2")</td>
-            <td>@sensorData.Humidity.ToString("F2")</td>
-            <td>@sensorData.WindSpeed.ToString("F2")</td>
-            <td>@sensorData.WindDirection.ToString("F2")</td>
-            <td>@sensorData.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
-        </tr>
+
+
+<div class="sensor-table-container">
+    <table class="sensor-table">
+        <thead>
+            <tr class="header-row">
+                <th class="header-cell">Id</th>
+                <th class="header-cell">Temperature [°C]</th>
+                <th class="header-cell">Humidity [%]</th>
+                <th class="header-cell">Wind speed [km/h]</th>
+                <th class="header-cell">Wind direction [deg]</th>
+                <th class="header-cell">Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sensorData in _sensorDataList)
+            {
+                <tr class="data-row">
+                    <td class="data-cell">@sensorData.Id</td>
+                    <td class="data-cell">@sensorData.Temperature.ToString("F2")</td>
+                    <td class="data-cell">@sensorData.Humidity.ToString("F2")</td>
+                    <td class="data-cell">@sensorData.WindSpeed.ToString("F2")</td>
+                    <td class="data-cell">@sensorData.WindDirection.ToString("F2")</td>
+                    <td class="data-cell">@sensorData.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<style>
+    .sensor-table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 10px;
     }
-    </tbody>
-</table>
+
+    .header-row {
+        background-color: #0A224E;
+        color: white;
+    }
+
+    .header-cell, .data-cell {
+        padding: 8px;
+        text-align: left;
+        font-weight: bold;
+        border: 1px solid #ddd;
+    }
+
+    .data-row:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
 
 @code {
     private readonly List<SensorDataModel> _sensorDataList = new List<SensorDataModel>();

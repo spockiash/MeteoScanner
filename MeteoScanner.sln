@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.WebUI", "MScanner.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.Helpers", "MScanner.Helpers\MScanner.Helpers.csproj", "{F83465E0-A701-49D4-92F1-96620DB1A060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MScanner.Factories", "MScanner.Factories\MScanner.Factories.csproj", "{83120C38-DCCD-451B-95A0-02EF9AA28904}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.Factories", "MScanner.Factories\MScanner.Factories.csproj", "{83120C38-DCCD-451B-95A0-02EF9AA28904}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

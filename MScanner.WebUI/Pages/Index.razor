@@ -37,18 +37,32 @@ Welcome to your new app.
     </RadzenRadialGauge>
 </div>*@
 
-<div class = "gauge-container">
+<div class="gauge-container">
+    <RadzenText TextStyle="TextStyle.DisplayH4">Wind Direction</RadzenText>
+    <RadzenRadialGauge Style="width: 100%; height: 300px;">
+        <RadzenRadialGaugeScale StartAngle="0" EndAngle="360" Step="45" Min="0" Max="360" TickPosition=GaugeTickPosition.Outside>
+            <RadzenRadialGaugeScalePointer Value="45" Length="0.6">
+                <Template Context="pointer">
+                    <h4>
+                        @pointer.Value <sup>°</sup>
+                    </h4>
+                </Template>
+            </RadzenRadialGaugeScalePointer>
+            <RadzenRadialGaugeScaleRange From="0" To="360" Fill="blue" />
+        </RadzenRadialGaugeScale>
+    </RadzenRadialGauge>
+
     <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
         <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
         <RadzenRadialGauge >
             <RadzenRadialGaugeScale Min="-50" Max="50">
-                <RadzenRadialGaugeScalePointer Value="-40" />
-                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
-                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
-                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
-                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
-                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
-                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red" />
+                <RadzenRadialGaugeScalePointer Value="-40"/>
+                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black"/>
+                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue"/>
+                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen"/>
+                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green"/>
+                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow"/>
+                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red"/>
             </RadzenRadialGaugeScale>
         </RadzenRadialGauge>
     </RadzenCard>
@@ -56,13 +70,13 @@ Welcome to your new app.
         <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
         <RadzenRadialGauge >
             <RadzenRadialGaugeScale Min="-50" Max="50">
-                <RadzenRadialGaugeScalePointer Value="-40" />
-                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
-                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
-                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
-                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
-                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
-                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red" />
+                <RadzenRadialGaugeScalePointer Value="-40"/>
+                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black"/>
+                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue"/>
+                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen"/>
+                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green"/>
+                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow"/>
+                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red"/>
             </RadzenRadialGaugeScale>
         </RadzenRadialGauge>
     </RadzenCard>
@@ -70,13 +84,13 @@ Welcome to your new app.
         <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
         <RadzenRadialGauge >
             <RadzenRadialGaugeScale Min="-50" Max="50">
-                <RadzenRadialGaugeScalePointer Value="-40" />
-                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
-                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
-                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
-                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
-                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
-                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red" />
+                <RadzenRadialGaugeScalePointer Value="-40"/>
+                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black"/>
+                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue"/>
+                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen"/>
+                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green"/>
+                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow"/>
+                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red"/>
             </RadzenRadialGaugeScale>
         </RadzenRadialGauge>
     </RadzenCard>
@@ -84,13 +98,13 @@ Welcome to your new app.
         <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
         <RadzenRadialGauge >
             <RadzenRadialGaugeScale Min="-50" Max="50">
-                <RadzenRadialGaugeScalePointer Value="-40" />
-                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
-                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
-                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
-                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
-                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
-                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red" />
+                <RadzenRadialGaugeScalePointer Value="-40"/>
+                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black"/>
+                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue"/>
+                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen"/>
+                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green"/>
+                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow"/>
+                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red"/>
             </RadzenRadialGaugeScale>
         </RadzenRadialGauge>
     </RadzenCard>
