@@ -2,113 +2,107 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+@using Microsoft.AspNetCore.SignalR.Client
+@using MScanner.Factories
+@using MScanner.Helpers
+@using MScanner.Models.Models
 
-Welcome to your new app.
+@using MScanner.WebUI.Constants
+@using MScanner.WebUI.Hubs.MScanner.WebUI.Hubs
+@using Timer = System.Threading.Timer
+@inject HubConnection HubConnection
 
-@*<SurveyPrompt Title="How is Blazor working for you?" />
-<RadzenRadialGauge>
-    <RadzenRadialGaugeScale Min="0" Max="260">
-        <RadzenRadialGaugeScalePointer Value="50" />
-        <RadzenRadialGaugeScaleRange From="0" To="90" Fill="green" />
-        <RadzenRadialGaugeScaleRange From="90" To="140" Fill="orange" />
-        <RadzenRadialGaugeScaleRange From="140" To="260" Fill="red" />
-    </RadzenRadialGaugeScale>
-</RadzenRadialGauge>
+@inject IUrlFactory UrlFactory
+@inject IHubConnectionFactory HubConnectionFactory
 
+<h1>Sensor Data</h1>
+<ApiTester></ApiTester>
 
-<div class="container" style="display: flex; flex-direction: column;
-                              flex-wrap: nowrap;
-                              justify-content: flex-start;
-                              align-items: stretch;
-                              align-content: stretch; max-width: 360px; padding: 100px;">
-    <RadzenBadge Text="Temperature [°C]" Color="secondary" />
+<div class="instruments-container">
 
-    <RadzenRadialGauge Style="width: 360px; height: 360px;">
-        <RadzenRadialGaugeScale Min="-50" Max="50">
-            <RadzenRadialGaugeScalePointer Value="-40" />
-            <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black" />
-            <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue" />
-            <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen" />
-            <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green" />
-            <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow" />
-            <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red" />
-        </RadzenRadialGaugeScale>
-    </RadzenRadialGauge>
-</div>*@
+    <TempGauge @ref="_tempGauge" SensorData="@_latestData"></TempGauge>
+    <CompassGauge @ref="_compassGauge" SensorData="@_latestData"></CompassGauge>
+    <HumidityGauge @ref="_humidityGauge" SensorData="@_latestData"></HumidityGauge>
+    <WindSpeedGauge @ref="_windSpeedGauge" SensorData="@_latestData"></WindSpeedGauge>
 
-<div class="gauge-container">
-    <RadzenText TextStyle="TextStyle.DisplayH4">Wind Direction</RadzenText>
-    <RadzenRadialGauge Style="width: 100%; height: 300px;">
-        <RadzenRadialGaugeScale StartAngle="0" EndAngle="360" Step="45" Min="0" Max="360" TickPosition=GaugeTickPosition.Outside>
-            <RadzenRadialGaugeScalePointer Value="45" Length="0.6">
-                <Template Context="pointer">
-                    <h4>
-                        @pointer.Value <sup>°</sup>
-                    </h4>
-                </Template>
-            </RadzenRadialGaugeScalePointer>
-            <RadzenRadialGaugeScaleRange From="0" To="360" Fill="blue" />
-        </RadzenRadialGaugeScale>
-    </RadzenRadialGauge>
-
-    <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
-        <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
-        <RadzenRadialGauge >
-            <RadzenRadialGaugeScale Min="-50" Max="50">
-                <RadzenRadialGaugeScalePointer Value="-40"/>
-                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black"/>
-                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue"/>
-                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen"/>
-                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green"/>
-                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow"/>
-                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red"/>
-            </RadzenRadialGaugeScale>
-        </RadzenRadialGauge>
-    </RadzenCard>
-    <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
-        <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
-        <RadzenRadialGauge >
-            <RadzenRadialGaugeScale Min="-50" Max="50">
-                <RadzenRadialGaugeScalePointer Value="-40"/>
-                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black"/>
-                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue"/>
-                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen"/>
-                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green"/>
-                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow"/>
-                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red"/>
-            </RadzenRadialGaugeScale>
-        </RadzenRadialGauge>
-    </RadzenCard>
-    <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
-        <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
-        <RadzenRadialGauge >
-            <RadzenRadialGaugeScale Min="-50" Max="50">
-                <RadzenRadialGaugeScalePointer Value="-40"/>
-                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black"/>
-                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue"/>
-                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen"/>
-                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green"/>
-                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow"/>
-                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red"/>
-            </RadzenRadialGaugeScale>
-        </RadzenRadialGauge>
-    </RadzenCard>
-    <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
-        <RadzenText TextStyle="TextStyle.DisplayH4">Temperature [°C]</RadzenText>
-        <RadzenRadialGauge >
-            <RadzenRadialGaugeScale Min="-50" Max="50">
-                <RadzenRadialGaugeScalePointer Value="-40"/>
-                <RadzenRadialGaugeScaleRange From="-50" To="-15" Fill="Black"/>
-                <RadzenRadialGaugeScaleRange From="-15" To="0" Fill="Blue"/>
-                <RadzenRadialGaugeScaleRange From="0" To="10" Fill="LightGreen"/>
-                <RadzenRadialGaugeScaleRange From="10" To="20" Fill="Green"/>
-                <RadzenRadialGaugeScaleRange From="20" To="30" Fill="Yellow"/>
-                <RadzenRadialGaugeScaleRange From="30" To="50" Fill="Red"/>
-            </RadzenRadialGaugeScale>
-        </RadzenRadialGauge>
-    </RadzenCard>
 </div>
+
+<SensorStreamGrid @ref="_grid"></SensorStreamGrid>
+
+<style>
+    .instruments-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+</style>
+
+@code {
+    private SensorStreamGrid? _grid;
+    private readonly List<SensorDataModel> _sensorDataList = new();
+    private SensorDataModel? _latestData;
+
+    private SensorDataHubProxy? _sensorDataHubProxy;
+
+    private TempGauge? _tempGauge;
+    private CompassGauge? _compassGauge;
+    private HumidityGauge? _humidityGauge;
+    private WindSpeedGauge? _windSpeedGauge;
+
+
+
+    private HubConnection? _hubConnection;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        //set url factory
+        UrlFactory.Initialize(ProjectConstants.ApiUrl);
+
+        //setup hub proxy connection
+        if (await NetworkHelper.IsApiOnline(UrlFactory.CreateUrl(EndPoints.Ping)))
+        {
+            await EstablishConnection();
+        }
+    }
+
+    private async Task EstablishConnection()
+    {
+        _hubConnection = HubConnectionFactory.GetConnectionBuilder(UrlFactory.CreateUrl(EndPoints.SensorDataHub));
+        _sensorDataHubProxy = new SensorDataHubProxy(_hubConnection);
+        if (_sensorDataHubProxy != null)
+        {
+            await _sensorDataHubProxy.ConnectAsync();
+            _sensorDataHubProxy.RegisterHandlers("ReceiveSensorData", OnReceiveSensorData);
+        }
+    }
+
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_sensorDataHubProxy != null) await _sensorDataHubProxy.DisconnectAsync();
+    }
+
+    private void OnReceiveSensorData(SensorDataModel sensorData)
+    {
+        _sensorDataList.Add(sensorData);
+        _grid?.AddSensorData(sensorData);
+        _latestData = sensorData;
+        UpdateInstruments();
+        StateHasChanged();
+    }
+
+    private void UpdateInstruments()
+    {
+        if (_latestData == null) return;
+        _tempGauge?.Update(_latestData);
+        _compassGauge?.Update(_latestData);
+        _humidityGauge?.Update(_latestData);
+        _windSpeedGauge?.Update(_latestData);
+    }
+}
 
 
 
