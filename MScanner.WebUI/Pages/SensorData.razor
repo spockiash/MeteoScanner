@@ -1,7 +1,4 @@
-﻿@page "/"
-
-<PageTitle>Index</PageTitle>
-
+﻿@page "/SensorData"
 @using Microsoft.AspNetCore.SignalR.Client
 @using MScanner.Factories
 @using MScanner.Helpers
@@ -19,7 +16,7 @@
 <ApiTester></ApiTester>
 
 <div class="instruments-container">
-
+    
     <TempGauge @ref="_tempGauge" SensorData="@_latestData"></TempGauge>
     <CompassGauge @ref="_compassGauge" SensorData="@_latestData"></CompassGauge>
     <HumidityGauge @ref="_humidityGauge" SensorData="@_latestData"></HumidityGauge>
@@ -31,6 +28,7 @@
 
 <style>
     .instruments-container {
+
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -103,7 +101,3 @@
         _windSpeedGauge?.Update(_latestData);
     }
 }
-
-
-
-

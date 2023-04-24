@@ -1,0 +1,37 @@
+﻿@using MScanner.Models.Models
+@using Radzen.Blazor
+
+@if (SensorData != null)
+{
+    <RadzenCard class="rz-background-color-primary-lighter rz-shadow-1 rz-border-radius-3 gauge-card">
+
+        <RadzenText TextStyle="TextStyle.DisplayH4">Humidity</RadzenText>
+        <RadzenRadialGauge Style="width: 100%; height: 250px;">
+            <RadzenRadialGaugeScale StartAngle="0" EndAngle="100" Step="20" Min="0" Max="100" TickPosition=GaugeTickPosition.Outside>
+                <RadzenRadialGaugeScalePointer Value=@SensorData.Humidity Length="0.6">
+                    <Template Context="pointer">
+                        <h4>
+                            @pointer.Value <sup>%</sup>
+                        </h4>
+                    </Template>
+                </RadzenRadialGaugeScalePointer>
+                <RadzenRadialGaugeScaleRange From="0" To="100" Fill="green" />
+            </RadzenRadialGaugeScale>
+        </RadzenRadialGauge>
+
+    </RadzenCard>
+}
+else
+{
+    <p>No data available.</p>
+}
+
+@code {
+    [Parameter] public SensorDataModel? SensorData { get; set; }
+
+    public void Update(SensorDataModel newMeasurement)
+    {
+        SensorData = newMeasurement;
+        StateHasChanged();
+    }
+}

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MeteoScanner.Api.Hubs;
+using Microsoft.AspNetCore.Mvc;
 using MScanner.Data;
 using MScanner.Data.Entities;
 using MScanner.Models.Models;
@@ -13,10 +14,12 @@ namespace MeteoScanner.Api.Controllers
     public class SensorDataController : ControllerBase
     {
         private readonly ISensorDataRepository _sensorDataRepository;
+        private readonly SensorDataHub _sensorDataHub;
 
-        public SensorDataController(ISensorDataRepository sensorDataRepository)
+        public SensorDataController(ISensorDataRepository sensorDataRepository, SensorDataHub sensorDataHub)
         {
             _sensorDataRepository = sensorDataRepository;
+            _sensorDataHub = sensorDataHub;
         }
 
         [HttpGet]
@@ -43,6 +46,7 @@ namespace MeteoScanner.Api.Controllers
         public async Task<ActionResult<SensorDataModel>> PostSensorData(SensorDataModel sensorDataModel)
         {
             var createdSensorData = await _sensorDataRepository.AddAsync(sensorDataModel);
+            await _sensorDataHub.SendSensorData(sensorDataModel);
             return CreatedAtAction(nameof(GetSensorData), new { id = createdSensorData.Id }, createdSensorData);
         }
 

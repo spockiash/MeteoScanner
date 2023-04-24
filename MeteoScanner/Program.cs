@@ -27,6 +27,8 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 // Add repository
 builder.Services.AddScoped<ISensorDataRepository, SensorDataRepository>();
 
+builder.Services.AddTransient<SensorDataHub>();
+
 //Add mapper
 builder.Services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<IConfigurationProvider>(), sp.GetService));
 
@@ -42,6 +44,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapHub<SensorDataHub>("/sensorDataHub");
+
+app.UseCors(corsPolicyBuilder =>
+{
+    corsPolicyBuilder.WithOrigins("https://localhost:7258") // replace with your frontend URL
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
+});
 
 app.UseRouting();
 app.UseHttpsRedirection();

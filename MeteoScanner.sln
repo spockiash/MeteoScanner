@@ -11,9 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.Data", "MScanner.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.Repository", "MScanner.Repository\MScanner.Repository.csproj", "{4423CD88-C2C5-4505-A5B6-4506FF0B16B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MScanner.Services", "MScanner.Services\MScanner.Services.csproj", "{5B09C019-580C-432C-8F2E-40E0C376A1E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.Services", "MScanner.Services\MScanner.Services.csproj", "{5B09C019-580C-432C-8F2E-40E0C376A1E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MScanner.WebUI", "MScanner.WebUI\MScanner.WebUI.csproj", "{DA79153C-792F-419F-A4B2-FAA924383062}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.WebUI", "MScanner.WebUI\MScanner.WebUI.csproj", "{DA79153C-792F-419F-A4B2-FAA924383062}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.Helpers", "MScanner.Helpers\MScanner.Helpers.csproj", "{F83465E0-A701-49D4-92F1-96620DB1A060}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MScanner.Factories", "MScanner.Factories\MScanner.Factories.csproj", "{83120C38-DCCD-451B-95A0-02EF9AA28904}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{DA79153C-792F-419F-A4B2-FAA924383062}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA79153C-792F-419F-A4B2-FAA924383062}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA79153C-792F-419F-A4B2-FAA924383062}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83465E0-A701-49D4-92F1-96620DB1A060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83465E0-A701-49D4-92F1-96620DB1A060}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83465E0-A701-49D4-92F1-96620DB1A060}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83465E0-A701-49D4-92F1-96620DB1A060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83120C38-DCCD-451B-95A0-02EF9AA28904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83120C38-DCCD-451B-95A0-02EF9AA28904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83120C38-DCCD-451B-95A0-02EF9AA28904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83120C38-DCCD-451B-95A0-02EF9AA28904}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
