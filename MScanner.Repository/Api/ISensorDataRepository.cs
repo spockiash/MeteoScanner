@@ -10,5 +10,6 @@ namespace MScanner.Repository.Api
         Task<SensorDataModel> AddAsync(SensorDataModel sensorData);
         Task<SensorDataModel> UpdateAsync(int id, SensorDataModel sensorData);
         Task DeleteAsync(int id);
+        Task SaveChangesAsync();
     }
 }

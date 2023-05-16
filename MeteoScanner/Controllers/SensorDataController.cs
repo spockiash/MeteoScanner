@@ -66,8 +66,22 @@ namespace MeteoScanner.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSensorData(int id)
         {
-            await _sensorDataRepository.DeleteAsync(id);
-            return NoContent();
+            try
+            {
+                await _sensorDataRepository.DeleteAsync(id);
+                await _sensorDataRepository.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Handle the InvalidOperationException (e.g., return a specific error response)
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions (e.g., log the error, return a generic error response)
+                return StatusCode(500, "An error occurred while processing the request.");
+            }
         }
     }
 

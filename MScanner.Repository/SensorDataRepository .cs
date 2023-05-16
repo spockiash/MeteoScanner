@@ -34,7 +34,6 @@ namespace MScanner.Repository
         {
             var entity = _mapper.Map<SensorDataEntity>(sensorData);
             _context.SensorData.Add(entity);
-            await _context.SaveChangesAsync();
             return _mapper.Map<SensorDataModel>(entity);
         }
 
@@ -43,10 +42,9 @@ namespace MScanner.Repository
             var entity = await _context.SensorData.FindAsync(id);
             if (entity == null)
             {
-                throw new ArgumentException("Sensor data with the specified ID does not exist.");
+                throw new InvalidOperationException("Sensor data with the specified ID does not exist.");
             }
             _mapper.Map(sensorData, entity);
-            await _context.SaveChangesAsync();
             return _mapper.Map<SensorDataModel>(entity);
         }
 
@@ -55,9 +53,13 @@ namespace MScanner.Repository
             var entity = await _context.SensorData.FindAsync(id);
             if (entity == null)
             {
-                throw new ArgumentException("Sensor data with the specified ID does not exist.");
+                throw new InvalidOperationException("Sensor data with the specified ID does not exist.");
             }
             _context.SensorData.Remove(entity);
+        }
+
+        public async Task SaveChangesAsync()
+        {
             await _context.SaveChangesAsync();
         }
     }
