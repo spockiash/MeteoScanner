@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using MScanner.Data;
 using MScanner.Data.Entities;
 using MScanner.Models.Models;
-using MScanner.Repository.Api;
 
 namespace MScanner.Repository
 {
@@ -18,10 +17,10 @@ namespace MScanner.Repository
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<SensorDataModel>> GetAllAsync()
+        public async Task<List<SensorDataModel>> GetAllAsync()
         {
             var entities = await _context.SensorData.ToListAsync();
-            return _mapper.Map<IEnumerable<SensorDataModel>>(entities);
+            return _mapper.Map<List<SensorDataModel>>(entities);
         }
 
         public async Task<SensorDataModel> GetByIdAsync(int id)
@@ -33,7 +32,7 @@ namespace MScanner.Repository
         public async Task<SensorDataModel> AddAsync(SensorDataModel sensorData)
         {
             var entity = _mapper.Map<SensorDataEntity>(sensorData);
-            _context.SensorData.Add(entity);
+            await _context.SensorData.AddAsync(entity);
             return _mapper.Map<SensorDataModel>(entity);
         }
 

@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using MScanner.Data;
 using MScanner.Repository;
-using MScanner.Repository.Api;
 using MScanner.Repository.Profiles;
 using IConfigurationProvider = AutoMapper.IConfigurationProvider;
 

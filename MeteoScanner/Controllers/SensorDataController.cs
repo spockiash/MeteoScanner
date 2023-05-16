@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MScanner.Data;
 using MScanner.Data.Entities;
 using MScanner.Models.Models;
-using MScanner.Repository.Api;
+using MScanner.Repository;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -1,7 +1,7 @@
 ﻿using MScanner.Data.Entities;
 using MScanner.Models.Models;
 
-namespace MScanner.Repository.Api
+namespace MScanner.Repository
 {
     public interface ISensorDataRepository
     {
