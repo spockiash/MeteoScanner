@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MeteoScanner.Enums\MeteoScanner.Enums.csproj" />
     <ProjectReference Include="..\MScanner.Models\MScanner.Models.csproj" />
   </ItemGroup>
 

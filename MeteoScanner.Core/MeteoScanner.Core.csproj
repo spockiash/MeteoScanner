@@ -6,4 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MeteoScanner.Enums\MeteoScanner.Enums.csproj" />
+    <ProjectReference Include="..\MScanner.Data\MScanner.Data.csproj" />
+    <ProjectReference Include="..\MScanner.Factories\MScanner.Factories.csproj" />
+    <ProjectReference Include="..\MScanner.Helpers\MScanner.Helpers.csproj" />
+    <ProjectReference Include="..\MScanner.Models\MScanner.Models.csproj" />
+    <ProjectReference Include="..\MScanner.Repository\MScanner.Repository.csproj" />
+    <ProjectReference Include="..\MScanner.Services\MScanner.Services.csproj" />
+  </ItemGroup>
+
 </Project>

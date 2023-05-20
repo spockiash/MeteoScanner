@@ -15,8 +15,4 @@
     <ProjectReference Include="..\MScanner.Models\MScanner.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Api\" />
-  </ItemGroup>
-
 </Project>

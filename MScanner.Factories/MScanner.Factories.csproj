@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MScanner.Helpers\MScanner.Helpers.csproj" />
+    <ProjectReference Include="..\MScanner.Models\MScanner.Models.csproj" />
+  </ItemGroup>
+
 </Project>
