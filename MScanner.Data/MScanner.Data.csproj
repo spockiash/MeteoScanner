@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MeteoScanner.Enums\MeteoScanner.Enums.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="sensor_data.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

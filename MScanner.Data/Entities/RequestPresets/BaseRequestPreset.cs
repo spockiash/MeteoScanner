@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MeteoScanner.Enums;
 
-namespace MScanner.Models.RequestModels
+namespace MScanner.Data.Entities.RequestPresets
 {
-    public class BaseRequestModel
+    public class BaseRequestPreset
     {
         public long Id { get; set; }
         public AvailableApiServices ApiService { get; set; }

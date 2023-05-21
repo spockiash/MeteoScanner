@@ -1,5 +1,7 @@
 ﻿using MeteoScanner.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MScanner.Data;
 using System.Diagnostics;
 
 namespace MeteoScanner.Core.Controllers
@@ -7,10 +9,12 @@ namespace MeteoScanner.Core.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly MeteoScannerContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MeteoScannerContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -18,10 +22,6 @@ namespace MeteoScanner.Core.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

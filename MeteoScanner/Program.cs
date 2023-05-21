@@ -1,5 +1,6 @@
 using AutoMapper;
 using MeteoScanner.Api.Hubs;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 using Microsoft.OpenApi.Models;
@@ -10,6 +11,12 @@ using IConfigurationProvider = AutoMapper.IConfigurationProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add configuration
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .Build();
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -19,7 +26,10 @@ builder.Services.AddSwaggerGen(c => {
 });
 
 // Add DbContext and AutoMapper
-builder.Services.AddDbContext<SensorDataContext>();
+builder.Services.AddDbContext<MeteoScannerContext>(options =>
+{
+    options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+});
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

@@ -10,4 +10,8 @@
     <Folder Include="PublicData\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MeteoScanner.Enums\MeteoScanner.Enums.csproj" />
+  </ItemGroup>
+
 </Project>

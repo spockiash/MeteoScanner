@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MeteoScanner.Core\MeteoScanner.Core.csproj" />
+    <ProjectReference Include="..\MeteoScanner.Enums\MeteoScanner.Enums.csproj" />
     <ProjectReference Include="..\MeteoScanner\MeteoScanner.Api.csproj" />
     <ProjectReference Include="..\MScanner.Data\MScanner.Data.csproj" />
     <ProjectReference Include="..\MScanner.Factories\MScanner.Factories.csproj" />

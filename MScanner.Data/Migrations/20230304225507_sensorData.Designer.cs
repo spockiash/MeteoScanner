@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MScanner.Data.Migrations
 {
-    [DbContext(typeof(SensorDataContext))]
+    [DbContext(typeof(MeteoScannerContext))]
     [Migration("20230304225507_sensorData")]
     partial class sensorData
     {

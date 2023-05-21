@@ -8,10 +8,10 @@ namespace MScanner.Repository
 {
     public class SensorDataRepository : ISensorDataRepository
     {
-        private readonly SensorDataContext _context;
+        private readonly MeteoScannerContext _context;
         private readonly IMapper _mapper;
 
-        public SensorDataRepository(SensorDataContext context, IMapper mapper)
+        public SensorDataRepository(MeteoScannerContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

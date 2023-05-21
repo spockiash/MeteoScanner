@@ -22,6 +22,5 @@ namespace MScanner.Models.RequestModels
         public string? CountryId { get; set; }
         //Limit results by a certain city or cities. (e.g. ?city=Chicago or ?city=Chicago&city=Boston)
         public string? City { get; set; }
-
     }
 }
