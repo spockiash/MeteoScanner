@@ -19,3 +19,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.form-container {
+  margin: 20px 15% 20px 15%;
+}
+.form-container .submit-button {
+  margin-top: 15px;
+}
+
+.control-button {
+  margin: 0 10px 0 10px;
+}
+
+.controls {
+  margin: 10px 0 10px 0;
+}
+
+.table-container {
+  margin: 10px 0 10px 0;
+}

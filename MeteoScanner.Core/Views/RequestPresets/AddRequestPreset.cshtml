@@ -1,0 +1,83 @@
+﻿@model MScanner.Models.RequestModels.OpenAqRequestModel
+
+@{
+    Model.Id = 0; // Set the Id property to 0 explicitly
+}
+<h2>Create new</h2>
+
+<div class="form-container">
+@using (Html.BeginForm("AddRequestPreset", "RequestPresets", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id, new { Value = 0 })
+    <div class="form-group">
+        @Html.HiddenFor(m => m.ApiService) <!-- Hide the ApiService field -->
+        @Html.LabelFor(m => m.ApiService, "Api Service") <!-- Use a label to display the ApiService -->
+        @Html.DisplayFor(m => m.ApiService) <!-- Display the ApiService value -->
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PresetName)
+        @Html.TextBoxFor(m => m.PresetName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.PresetName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UrlHost)
+        @Html.TextBoxFor(m => m.UrlHost, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.UrlHost)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UrlPath)
+        @Html.TextBoxFor(m => m.UrlPath, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.UrlPath)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UrlQuery)
+        @Html.TextBoxFor(m => m.UrlQuery, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.UrlQuery)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Limit)
+        @Html.TextBoxFor(m => m.Limit, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Limit)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Page)
+        @Html.TextBoxFor(m => m.Page, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Page)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Offset)
+        @Html.TextBoxFor(m => m.Offset, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Offset)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Sort)
+        @Html.TextBoxFor(m => m.Sort, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Sort)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CountryId)
+        @Html.TextBoxFor(m => m.CountryId, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CountryId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.City)
+        @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.City)
+    </div>
+
+    <!-- Additional fields specific to OpenAqRequestModel -->
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary submit-button">Submit</button>
+}
+</div>

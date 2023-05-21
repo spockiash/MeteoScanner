@@ -1,6 +1,50 @@
-﻿@model (int id, string name)
+﻿@model List<MScanner.Models.RequestModels.OpenAqRequestModel>
 
 <h2>Service Details</h2>
 
-<p>Service ID: @Model.id</p>
-<p>Service Name: @Model.name</p>
+<div class="container controls">
+    <a class="btn btn-primary control-button" href="@Url.Action("AddRequestPreset", "RequestPresets", new { serviceId = 1 })">Add Request Preset</a>
+</div>
+<div class="container table-container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Preset Name</th>
+            <th>Url Host</th>
+            <th>Url Path</th>
+            <th>Url Query</th>
+            <th>Limit</th>
+            <th>Page</th>
+            <th>Offset</th>
+            <th>Sort</th>
+            <th>Country Id</th>
+            <th>City</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.PresetName</td>
+                <td>@item.UrlHost</td>
+                <td>@item.UrlPath</td>
+                <td>@item.UrlQuery</td>
+                <td>@item.Limit</td>
+                <td>@item.Page</td>
+                <td>@item.Offset</td>
+                <td>@item.Sort</td>
+                <td>@item.CountryId</td>
+                <td>@item.City</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+

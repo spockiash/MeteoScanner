@@ -20,6 +20,7 @@ public static class OpenAqRequestPresetMapper
             UrlPath = model.UrlPath,
             UrlQuery = model.UrlQuery,
             ApiService = model.ApiService,
+            PresetName = model.PresetName,
         };
     }
 

@@ -2,14 +2,15 @@
 @model Dictionary<int, string>
 
 <h2>Available API Services</h2>
-
-<ul>
-    @foreach (var entry in Model)
-    {
-        <li>
-            <a asp-controller="RequestPresets" asp-action="ServiceDetails" asp-route-id="@entry.Key">
-                @entry.Key: @entry.Value
-            </a>
-        </li>
-    }
-</ul>
+<div class="form-container">
+    <ul class="list-group">
+        @foreach (var entry in Model)
+        {
+            <li class="list-group-item">
+                <a asp-controller="RequestPresets" asp-action="ServiceDetails" asp-route-id="@entry.Key">
+                    @entry.Key: @entry.Value
+                </a>
+            </li>
+        }
+    </ul>
+</div>

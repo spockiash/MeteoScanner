@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MeteoScanner.Enums;
 using Microsoft.EntityFrameworkCore;
 using MScanner.Data;
 using MScanner.Models.RequestModels;
@@ -24,6 +25,7 @@ namespace MScanner.Repository.RequestPresets
             {
                 Id = x.Id,
                 ApiService = x.ApiService,
+                PresetName = x.PresetName,
                 City = x.City,
                 CountryId = x.CountryId,
                 Limit = x.Limit,
@@ -36,6 +38,25 @@ namespace MScanner.Repository.RequestPresets
             }).FirstOrDefaultAsync() ?? new OpenAqRequestModel();
         }
 
+        public async Task<List<OpenAqRequestModel>> GetByService(AvailableApiServices service)
+        {
+            return await _context.ApiRequestPresets.Where(x => x.ApiService == service).Select(x => new OpenAqRequestModel()
+            {
+                Id = x.Id,
+                ApiService = x.ApiService,
+                PresetName = x.PresetName,
+                City = x.City,
+                CountryId = x.CountryId,
+                Limit = x.Limit,
+                Offset = x.Offset,
+                Page = x.Page,
+                Sort = x.Sort,
+                UrlHost = x.UrlHost,
+                UrlPath = x.UrlPath,
+                UrlQuery = x.UrlQuery,
+            }).ToListAsync();
+        }
+
         public async Task<List<OpenAqRequestModel>> GetAllAsync()
         {
             var presets = await _context.ApiRequestPresets.ToListAsync();
@@ -43,6 +64,7 @@ namespace MScanner.Repository.RequestPresets
             {
                 Id = preset.Id,
                 ApiService = preset.ApiService,
+                PresetName = preset.PresetName,
                 City = preset.City,
                 CountryId = preset.CountryId,
                 Limit = preset.Limit,

@@ -11,6 +11,7 @@ namespace MScanner.Data.Entities.RequestPresets
     {
         public long Id { get; set; }
         public AvailableApiServices ApiService { get; set; }
+        public string? PresetName { get; set; }
         public string? UrlHost { get; set; }
         public string? UrlPath { get; set; }
         public string? UrlQuery { get; set; }
